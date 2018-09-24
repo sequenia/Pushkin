@@ -5,7 +5,7 @@ require "pushkin/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "pushkin"
+  s.name        = "pushkin-library"
   s.version     = Pushkin::VERSION
   s.authors     = ["Bazov Peter"]
   s.email       = ["petr@sequenia.com"]
