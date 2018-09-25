@@ -1,6 +1,23 @@
 # Pushkin
 Pushkin sends push notifications to Android, iOS and Web clients through unified simple interface using FCM.
 
+## Installation
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'pushkin-library'
+```
+
+And then execute:
+```bash
+$ bundle install
+```
+
+Or install it yourself as:
+```bash
+$ gem install pushkin-library
+```
+
 ## Usage
 Execute in command line:
 ```bash
@@ -61,23 +78,6 @@ PUSHKIN.requestPermission();
 ```
 
 **Attention!** If you want to show push notifications while browser is closed, you still needs to implement this logic in *firebase-messaging-sw.js* yourself.
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'pushkin-library'
-```
-
-And then execute:
-```bash
-$ bundle install
-```
-
-Or install it yourself as:
-```bash
-$ gem install pushkin-library
-```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
