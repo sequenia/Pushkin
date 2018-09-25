@@ -3,6 +3,8 @@ Pushkin sends push notifications to Android, iOS and Web clients through unified
 
 ## Usage
 
+### Notifications creating
+
 Simple push notification sending:
 ```ruby
 notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
@@ -15,6 +17,25 @@ notification.send_now
 ```
 
 It creates push notification with static content and sends it to specified users. Actual user tokens retreiving from database dynamicly at the time of sending.
+
+### Common parameters
+
+**notification_type** - String. Required. Custom string for distinguish notifications from each other.
+
+**title** - String. Notification title.
+
+**body** - String. Text of notification.
+
+**click_action** - Hash. Click actions for each platform.
+* URL under the `:web` key.
+* Category in the APNs payload under the `:ios` key.
+* Intent filter to launch Activity under the `:android` key.
+
+**icon** - Hash. 
+
+### Parameters for simple_notification_to_users
+
+**users** - List of users to send push notifications.
 
 ## Gem Installation
 Add this line to your application's Gemfile:
