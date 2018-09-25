@@ -47,9 +47,7 @@ include Pushkin::Concerns::PushkinUser
 
 ## Web Push Notifications Setup
 
-If you don't want to implement push notifications showing in web browsers, you can use Pushkin implementation.
-
-Add JavaScript Firebase Cloud Messaging Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token retreiving, token refresh monitoring and notification showing. Pushkin implements it for you.
+Add JavaScript Firebase Cloud Messaging Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token retreiving, token refresh monitoring and notification showing. You only needs to setup FCM project in FCM console, link FCM libraries and put manifest file to public directory.
 
 Add this line to yout layout file:
 ```erb
