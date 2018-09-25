@@ -3,6 +3,19 @@ Pushkin sends push notifications to Android, iOS and Web clients through unified
 
 ## Usage
 
+Simple push notification sending:
+```ruby
+notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
+  notification_type: "poem",
+  users: User.all,
+  title: "Ruslan and Ludmila",
+  body: "The story of the abduction of Ludmila, the daughter of Prince Vladimir of Kiev, by an evil wizard and the attempt by the brave knight Ruslan to find and rescue her"
+})
+notification.send_now
+```
+
+It creates push notification with static content and sends it to specified users. Actual user tokens retreiving from database dynamicly at the time of sending.
+
 ## Gem Installation
 Add this line to your application's Gemfile:
 
@@ -13,11 +26,6 @@ gem 'pushkin-library'
 And then execute:
 ```bash
 $ bundle install
-```
-
-Or install it yourself as:
-```bash
-$ gem install pushkin-library
 ```
 
 Execute in command line:
