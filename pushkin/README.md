@@ -1,5 +1,5 @@
 # Pushkin
-Pushkin can help you plan and send push notifications to Android, iOS and Web clients through unified simple interface using FCM.
+Pushkin sends push notifications to Android, iOS and Web clients through unified simple interface using FCM.
 
 ## Usage
 Execute in command line:
@@ -10,7 +10,7 @@ $ bin/rails generate pushkin:setup
 It will generate:
 * migration *CreatePushkinTables* to create tables for notifications sending.
 * controller *Pushkin::Api::V1::TokensController* for managing device tokens.
-* routes for tokens controller
+* routes for tokens controller.
 
 And then run migration:
 ```bash
@@ -23,14 +23,14 @@ PUSHKIN_API_KEY=ANY_API_KEY_FOR_REQUEST_AUTHORIZATION
 FCM_SERVER_KEY=YOUR_FCM_SERVER_KEY_FROM_FCM_CONSOLE
 ```
 
-If you want to attach device tokens to users, you need to realize authentication logic in *Pushkin::Api::V1::TokensController* and add this line to *User* model:
+If you want to attach device tokens to users, you need to implement authentication logic in *Pushkin::Api::V1::TokensController* and add this line to *User* model:
 ```ruby
 include Pushkin::Concerns::PushkinUser
 ```
 
 ## Web Push Notifications Setup
 
-If you don't want to realize push notifications showing in web browsers, you can use Pushkin implementation.
+If you don't want to implement push notifications showing in web browsers, you can use Pushkin implementation.
 
 Add JavaScript Firebase Cloud Messaging Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token retreiving, token refresh monitoring and notification showing. Pushkin implements it for you.
 
@@ -59,6 +59,8 @@ Init notifications showing and permission request:
 PUSHKIN.initNotifications();
 PUSHKIN.requestPermission();
 ```
+
+**Attention!** If you want to show push notifications while browser is closed, you still needs to implement this logic in *firebase-messaging-sw.js* yourself.
 
 ## Installation
 Add this line to your application's Gemfile:
