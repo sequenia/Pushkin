@@ -1,7 +1,9 @@
 # Pushkin
 Pushkin sends push notifications to Android, iOS and Web clients through unified simple interface using FCM.
 
-## Installation
+## Usage
+
+## Gem Installation
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -18,7 +20,6 @@ Or install it yourself as:
 $ gem install pushkin-library
 ```
 
-## Usage
 Execute in command line:
 ```bash
 $ bin/rails generate pushkin:setup
