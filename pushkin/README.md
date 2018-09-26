@@ -1,12 +1,13 @@
 # Pushkin
-Pushkin sends push notifications to Android, iOS and Web clients through unified simple interface using FCM.
+Pushkin sends push notifications to Android, iOS and Web clients through the unified simple interface using FCM.
+You can also show Web Push Notifications using Pushkin implementation.
 
 ## Usage
 
 ### How to create notifications
 
 ```ruby
-notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
+notification = Pushkin.simple_notification_to_users({
   notification_type: "poem",
   users: User.all,
   title: "Ruslan and Ludmila",
@@ -14,33 +15,62 @@ notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
 })
 ```
 
-It creates push notification with static content to specified users. Actual user tokens will be retrieved from database at the time of sending.
+It creates a push notification with static content to the specified users. Actual user tokens will be queried from the database at the time of sending.
+
+Run this code to send notification immediately using ActiveJob:
+```ruby
+notification.send_now
+```
+
+You can also send notifications synchronously:
+```ruby
+notification.send_now(async: false)
+```
 
 ### Creation parameters
 
-| Parameter          | Usage                    | Description                                                 |
-| ------------------ | ------------------------ | ----------------------------------------------------------- |
-| :notification_type | Required, String         | Custom string to  distinguish notifications from each other |
-| :users             | Required, Array/Relation | List of users to send push notifications                    |
-| :title             | Required, String         | Notification title                                          |
-| :body              | Optional, String         | Text of notification                                        |
-| :click_action      | Optional, Hash           | Click actions for each platform                             |
-| :icon              | Optional, Hash           | Notification icon for web and android                       |
+| Parameter          | Usage                    | Description                                                        |
+| ------------------ | ------------------------ | ------------------------------------------------------------------ |
+| :notification_type | Required, String         | Custom string to distinguish notifications from each other         |
+| :users             | Required, Array/Relation | List of users to send push notifications                           |
+| :title             | Required, String         | Notification title                                                 |
+| :body              | Optional, String         | Notification text                                                  |
+| :click_action      | Optional, Hash           | Click actions of each platform                                     |
+| :icon              | Optional, Hash           | Notification icon for web and android platforms                    |
+| :is_data_message   | Optional, Hash           | Specifies if you want to send data message instead of notification |
+| :data              | Optional, Hash           | Any notification data that will be sent in the notification        |
 
-Click action hash keys
+In any case, :data hash will include following parameters:
 
-| Parameter | Usage                | description                      |
-| --------- | -------------------- | -------------------------------- |
-| :web      | Optional, String     | URL to open in browser           |
-| :ios      | Optional, String     | Category in the APNs payload     |
-| :android  | Optional, String     | Intent filter to launch Activity |
+| Parameter               | Usage                | description                                  |
+| ----------------------- | -------------------- | -------------------------------------------- |
+| :notification_type      | Required, String     | Value of :notification_type parameter        |
+| :notification_id        | Required, Integer    | Unique identifier of created notification    |
 
-Icon hash keys
+**:click_action hash keys**
+
+| Parameter | Usage                | description                          |
+| --------- | -------------------- | ------------------------------------ |
+| :web      | Optional, String     | URL to open in the browser           |
+| :ios      | Optional, String     | Category in the APNs payload         |
+| :android  | Optional, String     | Intent filter to launch the Activity |
+
+**:icon hash keys**
 
 | key      | value type           | description                      |
 | -------- | -------------------- | -------------------------------- |
 | :web     | Optional, String     | Public absolute URL of icon      |
-| :android | Optional, String     | Drawable resource name           | 
+| :android | Optional, String     | Drawable resource name           |
+
+**:is_data_message hash keys**
+
+| key      | value type           | description                      |
+| -------- | -------------------- | -------------------------------- |
+| :web     | Optional, Boolean    | True, if you want to send data message to web client     |
+| :ios     | Optional, Boolean    | True, if you want to send data message to ios client     |
+| :android | Optional, Boolean    | True, if you want to send data message to android client | 
+
+In case of data messages all notification attributes like title and body will be sent in data instead of notification.
 
 ## Gem Installation
 Add this line to your application's Gemfile:
@@ -82,7 +112,7 @@ include Pushkin::Concerns::PushkinUser
 
 ## Web Push Notifications Setup
 
-Add JavaScript FCM Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token access and notification showing. You just need to create FCM project in FCM console, link FCM libraries and put manifest file to public directory.
+Add JavaScript FCM Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token access and notifications showing. You just need to create FCM project in FCM console, link FCM libraries and put manifest file to public directory.
 
 Add this lines to your layout file:
 ```erb
@@ -92,7 +122,7 @@ Add this lines to your layout file:
 <%= javascript_include_tag "pushkin/application" %>
 ```
 
-Init FCM messaging object and save it to Pushkin:
+Init FCM messaging object in javascript code and save it to Pushkin:
 ```javascript
 firebase.initializeApp(yourFirebaseSettings);
 var messaging = firebase.messaging();
