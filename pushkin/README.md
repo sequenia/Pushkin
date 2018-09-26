@@ -27,14 +27,16 @@ It creates push notification with static content to specified users. Actual user
 | :click_action      | Optional, Hash           | Click actions for each platform                             |
 | :icon              | Optional, Hash           | Notification icon for web and android                       |
 
-Click action hash keys:
+Click action hash keys
+
 | Parameter | Usage                | description                      |
 | --------- | -------------------- | -------------------------------- |
 | :web      | Optional, String     | URL to open in browser           |
 | :ios      | Optional, String     | Category in the APNs payload     |
 | :android  | Optional, String     | Intent filter to launch Activity |
 
-Icon hash keys:
+Icon hash keys
+
 | key      | value type           | description                      |
 | -------- | -------------------- | -------------------------------- |
 | :web     | Optional, String     | Public absolute URL of icon      |
