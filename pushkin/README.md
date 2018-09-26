@@ -18,16 +18,17 @@ It creates push notification with static content to specified users. Actual user
 
 ### Creation parameters
 
-| Parameter          | Usage                    | Description                                                 |
-| ------------------ | ------------------------ | ----------------------------------------------------------- |
-| :notification_type | Required, String         | Custom string to  distinguish notifications from each other |
-| :users             | Required, Array/Relation | List of users to send push notifications                    |
-| :title             | Required, String         | Notification title                                          |
-| :body              | Optional, String         | Text of notification                                        |
-| :click_action      | Optional, Hash           | Click actions for each platform                             |
-| :icon              | Optional, Hash           | Notification icon for web and android                       |
+| Parameter          | Usage                    | Description                                                        |
+| ------------------ | ------------------------ | ------------------------------------------------------------------ |
+| :notification_type | Required, String         | Custom string to  distinguish notifications from each other        |
+| :users             | Required, Array/Relation | List of users to send push notifications                           |
+| :title             | Required, String         | Notification title                                                 |
+| :body              | Optional, String         | Text of notification                                               |
+| :click_action      | Optional, Hash           | Click actions for each platform                                    |
+| :icon              | Optional, Hash           | Notification icon for web and android                              |
+| :is_data_message   | Optional, Hash           | Specifies if you want to send data message instead of notification |
 
-Click action hash keys
+**Click action hash keys**
 
 | Parameter | Usage                | description                      |
 | --------- | -------------------- | -------------------------------- |
@@ -35,12 +36,22 @@ Click action hash keys
 | :ios      | Optional, String     | Category in the APNs payload     |
 | :android  | Optional, String     | Intent filter to launch Activity |
 
-Icon hash keys
+**Icon hash keys**
 
 | key      | value type           | description                      |
 | -------- | -------------------- | -------------------------------- |
 | :web     | Optional, String     | Public absolute URL of icon      |
-| :android | Optional, String     | Drawable resource name           | 
+| :android | Optional, String     | Drawable resource name           |
+
+**Is Data Message hash keys**
+
+| key      | value type           | description                      |
+| -------- | -------------------- | -------------------------------- |
+| :web     | Optional, Boolean    | True, if you want to send data message to web     |
+| :ios     | Optional, Boolean    | True, if you want to send data message to ios     |
+| :android | Optional, Boolean    | True, if you want to send data message to android | 
+
+In case of data messages all notification attributes like title and body will be sent in data instead of notification.
 
 ## Gem Installation
 Add this line to your application's Gemfile:
