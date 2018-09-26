@@ -99,10 +99,11 @@ And then run migration:
 $ rake db:migrate
 ```
 
-Add the following to your environment variables:
-```bash
-PUSHKIN_API_KEY=ANY_API_KEY_FOR_REQUEST_AUTHORIZATION
-FCM_SERVER_KEY=YOUR_FCM_SERVER_KEY_FROM_FCM_CONSOLE
+By default Pushkin uses FCM_SERVER_KEY environment variable for sending push notifications, but you can configure Pushkin yourself in config/applocation.rb:
+```ruby
+Pushkin.configure do |config|
+  config.fcm_server_key = ENV["FCM_SERVER_KEY"]
+end
 ```
 
 If you want to attach device tokens to users, you need to implement authentication logic in *Pushkin::Api::V1::TokensController* and add this line to *User* model:
