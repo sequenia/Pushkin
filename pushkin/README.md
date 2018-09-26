@@ -19,20 +19,27 @@ It creates push notification with static content to specified users. Actual user
 
 ### Creation parameters
 
-**notification_type** - String. Required. Custom string for distinguish notifications from each other.
+| Parameter          | Usage                    | Description                                                 |
+| ------------------ | ------------------------ | ----------------------------------------------------------- |
+| :notification_type | Required, String         | Custom string for distinguish notifications from each other |
+| :users             | Required, Array/Relation | List of users to send push notifications                    |
+| :title             | Required, String         | Notification title                                          |
+| :body              | Optional, String         | Text of notification                                        |
+| :click_action      | Optional, Hash           | Click actions for each platform                             |
+| :icon              | Optional, Hash           | Notification icon for web and android                       |
 
-**users** - List of users to send push notifications.
+Click action hash keys:
+| Parameter | Usage                | description                      |
+| --------- | -------------------- | -------------------------------- |
+| :web      | Optional, String     | URL to open in browser           |
+| :ios      | Optional, String     | Category in the APNs payload     |
+| :android  | Optional, String     | Intent filter to launch Activity |
 
-**title** - String. Notification title.
-
-**body** - String. Text of notification.
-
-**click_action** - Hash. Click actions for each platform.
-* URL under the `:web` key.
-* Category in the APNs payload under the `:ios` key.
-* Intent filter to launch Activity under the `:android` key.
-
-**icon** - Hash. 
+Icon hash keys:
+| key      | value type           | description                      |
+| -------- | -------------------- | -------------------------------- |
+| :web     | Optional, String     | Public absolute URL of icon      |
+| :android | Optional, String     | Drawable resource name           | 
 
 ## Gem Installation
 Add this line to your application's Gemfile:
@@ -74,10 +81,13 @@ include Pushkin::Concerns::PushkinUser
 
 ## Web Push Notifications Setup
 
-Add JavaScript Firebase Cloud Messaging Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token retreiving, token refresh monitoring and notification showing. You only needs to setup FCM project in FCM console, link FCM libraries and put manifest file to public directory.
+Add JavaScript FCM Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token access and notification showing. You just need to create FCM project in FCM console, link FCM libraries and put manifest file to public directory.
 
-Add this line to yout layout file:
+Add this lines to your layout file:
 ```erb
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js"></script>
+<link rel="manifest" href="/manifest.json">
 <%= javascript_include_tag "pushkin/application" %>
 ```
 
@@ -96,7 +106,7 @@ Pushkin.prototype.sendFirebaseTokenToServer = function (currentToken) {
 }
 ```
 
-Init notifications showing and permission request:
+Init notifications showing, access to token and permission request:
 ```javascript
 PUSHKIN.initNotifications();
 PUSHKIN.requestPermission();
