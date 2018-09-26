@@ -5,7 +5,6 @@ Pushkin sends push notifications to Android, iOS and Web clients through unified
 
 ### How to create notifications
 
-Simple push notification:
 ```ruby
 notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
   notification_type: "poem",
