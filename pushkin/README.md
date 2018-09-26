@@ -6,7 +6,7 @@ Pushkin sends push notifications to Android, iOS and Web clients through the uni
 ### How to create notifications
 
 ```ruby
-notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
+notification = Pushkin.simple_notification_to_users({
   notification_type: "poem",
   users: User.all,
   title: "Ruslan and Ludmila",
@@ -15,6 +15,16 @@ notification = Pushkin::NotificationFabric.new.simple_notification_to_users({
 ```
 
 It creates a push notification with static content to the specified users. Actual user tokens will be queried from the database at the time of sending.
+
+Run this code to send notification immediately using ActiveJob:
+```ruby
+notification.send_now
+```
+
+You can also send notifications synchronously:
+```ruby
+notification.send_now(async: false)
+```
 
 ### Creation parameters
 
