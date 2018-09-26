@@ -31,12 +31,12 @@ module Pushkin
     validates :notification_type, presence: true
 
     # Отправляет уведомление прямо сейчас
-    def send_now
+    def send_now(async: true)
       # Заполняем как дату, в которую нужно отправить, так и дату, в которую началась отправка.
       # Это позволит периодической операции по отправке уведомлений не отвлекаться на такое уведомление.
       now = DateTime.now
       self.update_attributes(start_at: now, started_at: now)
-      SendJob.perform_later(self.id)
+      async ? SendJob.perform_later(self.id) : SendPushService.new(self.id).call
     end
   end
 end
