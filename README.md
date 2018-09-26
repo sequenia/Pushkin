@@ -146,5 +146,44 @@ PUSHKIN.requestPermission();
 
 **Attention!** If you want to show push notifications while browser is closed, you still needs to implement this logic in *firebase-messaging-sw.js* yourself.
 
+## Tokens management API
+
+**Request type:** POST
+
+**Content type:** 'application/json'
+
+**Request body:**
+```json
+{
+  "push_token_info":{
+    "platform":"android",
+    "token":"123456",
+    "old_token":"12345"
+  }
+}
+```
+
+| key       | value type           | description                                              |
+| --------- | -------------------- | -------------------------------------------------------- |
+| platform  | Required, String     | Platform type. Available values: "web", "android", "ios" |
+| token     | Required, String     | The token for push notifications sending                 |
+| old_token | Optional, String     | The old token value to deactivate if token refreshed     |
+
+If you send the authentication data in this request, Pushkin will attach current user to token. Otherwise, Pushkin will destroy the user-token relation.
+
+**Response body:**
+```json
+{
+  "success":true,
+  "info":"Done"
+}
+
+```
+
+| key       | value type           | description                                              |
+| --------- | -------------------- | -------------------------------------------------------- |
+| success   | Required, Boolean    | True, if the request completed without any error         |
+| info      | Required, String     | Short description of response / Error info               |
+
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
