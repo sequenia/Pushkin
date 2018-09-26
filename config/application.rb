@@ -14,5 +14,9 @@ module Pushkin
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    Pushkin.configure do |config|
+      config.fcm_server_key = ENV["FCM_SERVER_KEY"]
+    end
   end
 end

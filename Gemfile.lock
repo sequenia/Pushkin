@@ -1,7 +1,7 @@
 PATH
   remote: pushkin
   specs:
-    pushkin-library (0.1.4)
+    pushkin-library (0.1.5)
       faraday (>= 0.12, < 0.16)
       rails (>= 5.0, < 6)
 

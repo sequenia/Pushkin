@@ -7,7 +7,6 @@ module Pushkin::Api::V1::Concerns::TokensHelper
 
     include Pushkin::Api::V1::Concerns::ApiHelper
 
-    before_action :check_api_key!
     before_action :init_creation_params!, only: [:create]
 
     EMPTY_TOKEN_ERROR = "param 'token' is empty"

@@ -13,8 +13,7 @@ module Pushkin
       def initialize(tokens, payload)
         @tokens = tokens
         @payload = payload
-        @server_key = ENV["FCM_SERVER_KEY"]
-        raise Exception.new("No FCM_SERVER_KEY in ENV") if @server_key.blank?
+        @server_key = Pushkin.config.fcm_server_key
       end
 
       def call

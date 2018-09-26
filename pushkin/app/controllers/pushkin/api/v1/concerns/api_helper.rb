@@ -4,18 +4,6 @@ module Pushkin::Api::V1::Concerns::ApiHelper
   extend ActiveSupport::Concern
 
   included do
-    WRONG_API_KEY = "Wrong API key"
-
-    # Проверяет переданный ключ API и возвращает ошибку в случае несовпадения.
-    # Для минимальной защиты от несанкционированного доступа.
-    def check_api_key!
-      api_key = ENV["PUSHKIN_API_KEY"]
-      raise Exception.new("No PUSHKIN_API_KEY in ENV") if api_key.blank?
-
-      if api_key != params[:push_api_key]
-        render :status => 403, :json => { :success => false, :info => WRONG_API_KEY }
-      end
-    end
 
     def render_bad_request(info, errors = nil)
       render_error(400, info, errors)
