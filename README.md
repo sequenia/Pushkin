@@ -1,6 +1,6 @@
 # Pushkin
 
-[![Gem Version](https://badge.fury.io/rb/sidekiq.svg)](https://rubygems.org/gems/sidekiq)
+[![Gem Version](https://badge.fury.io/rb/pushkin-library.svg)](https://rubygems.org/gems/pushkin-library)
 
 Pushkin sends push notifications to Android, iOS and Web clients through the unified simple interface using FCM.
 You can also show Web Push Notifications using Pushkin implementation.
