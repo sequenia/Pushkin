@@ -99,7 +99,7 @@ And then run migration:
 $ rake db:migrate
 ```
 
-By default Pushkin uses FCM_SERVER_KEY environment variable for sending push notifications, but you can configure Pushkin yourself in config/applocation.rb:
+By default Pushkin uses FCM_SERVER_KEY environment variable for sending push notifications, but you can configure Pushkin yourself in config/application.rb:
 ```ruby
 Pushkin.configure do |config|
   config.fcm_server_key = ENV["FCM_SERVER_KEY"]
