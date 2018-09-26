@@ -1,5 +1,6 @@
 # Pushkin
 Pushkin sends push notifications to Android, iOS and Web clients through the unified simple interface using FCM.
+You can also show Web Push Notifications using Pushkin implementation.
 
 ## Usage
 
@@ -111,7 +112,7 @@ include Pushkin::Concerns::PushkinUser
 
 ## Web Push Notifications Setup
 
-Add JavaScript FCM Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token access and notification showing. You just need to create FCM project in FCM console, link FCM libraries and put manifest file to public directory.
+Add JavaScript FCM Client App to your Rails App ([instructions](https://firebase.google.com/docs/cloud-messaging/js/client)) without permission request, token access and notifications showing. You just need to create FCM project in FCM console, link FCM libraries and put manifest file to public directory.
 
 Add this lines to your layout file:
 ```erb
@@ -121,7 +122,7 @@ Add this lines to your layout file:
 <%= javascript_include_tag "pushkin/application" %>
 ```
 
-Init FCM messaging object and save it to Pushkin:
+Init FCM messaging object in javascript code and save it to Pushkin:
 ```javascript
 firebase.initializeApp(yourFirebaseSettings);
 var messaging = firebase.messaging();
