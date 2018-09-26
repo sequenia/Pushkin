@@ -20,7 +20,7 @@ It creates push notification with static content to specified users. Actual user
 
 | Parameter          | Usage                    | Description                                                 |
 | ------------------ | ------------------------ | ----------------------------------------------------------- |
-| :notification_type | Required, String         | Custom string for distinguish notifications from each other |
+| :notification_type | Required, String         | Custom string to  distinguish notifications from each other |
 | :users             | Required, Array/Relation | List of users to send push notifications                    |
 | :title             | Required, String         | Notification title                                          |
 | :body              | Optional, String         | Text of notification                                        |
