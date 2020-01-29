@@ -6,7 +6,7 @@ module Pushkin
     STATUS_ERROR = "error"
 
     belongs_to :push_sending_result, optional: true
-    belongs_to :token
+    belongs_to :token, -> { with_not_active }
 
     scope :invalid, -> { self.where(status: STATUS_INVALID) }
 

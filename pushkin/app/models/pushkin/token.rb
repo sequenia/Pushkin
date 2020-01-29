@@ -13,6 +13,7 @@ module Pushkin
     enum platform: [:android, :ios, :web]
 
     scope :active, -> { self.where(is_active: true) }
+    scope :with_not_active, -> { self.unscope(where: :is_active) }
 
     # По умолчанию нужно работать только с активными устройствами.
     default_scope { self.active }
