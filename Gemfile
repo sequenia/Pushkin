@@ -39,10 +39,7 @@ gem 'bootsnap', require: false
 # Environment variables
 gem 'dotenv-rails'
 
-# HTTP requests
-#gem 'faraday', '~> 0.14'
-
-gem 'pushkin-library', path: 'pushkin', require: ['faraday', 'pushkin']
+gem 'pushkin-library', path: 'pushkin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
