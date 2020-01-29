@@ -13,7 +13,9 @@ module Pushkin
     def setup_application
       file_name = "tokens_controller.rb"
       copy_file file_name, "app/controllers/pushkin/api/v1/#{file_name}"
-      migration_template "create_pushkin_tables.rb", "db/migrate/create_pushkin_tables.rb"
+      migration_template "create_pushkin_tables.rb",
+                         "db/migrate/create_pushkin_tables1.rb",
+                         migration_version: migration_version
 
       route "namespace :pushkin do\n" +
             "    namespace :api do\n" +
@@ -22,6 +24,10 @@ module Pushkin
             "      end\n" +
             "    end\n" +
             "  end\n"
+    end
+
+    def migration_version
+      "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
     end
   end
 end

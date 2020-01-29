@@ -1,4 +1,4 @@
-class CreatePushkinTables < ActiveRecord::Migration[5.1]
+class CreatePushkinTables < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :pushkin_tokens do |t|
       t.integer :user_id
