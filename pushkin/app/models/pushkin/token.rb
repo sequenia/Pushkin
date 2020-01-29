@@ -2,7 +2,9 @@
 module Pushkin
   class Token < ApplicationRecord
 
-    belongs_to :user, optional: true
+    belongs_to :user,
+               optional: true,
+               class_name: Pushkin::Configuration.instance.user_class_name
 
     validates :token, presence: true, uniqueness: { scope: :platform }
     validates :platform, presence: true
